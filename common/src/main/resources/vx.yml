@@ -1,10 +1,10 @@
 vxparameter:
   # 令牌(Token)
-  token: jolyoulu
+  token: xxx
   # 开发者ID(AppID)
-  appId: wxcdab638515cfa55e
+  appId: wxcda354ewr
   # 开发者密码(AppSecret)
-  appSecret: cefe18a81c5170e3150b85c30084f8e3
+  appSecret: cefe18a813r3s35s
 
   accessTokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
   menuUrl: https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN
