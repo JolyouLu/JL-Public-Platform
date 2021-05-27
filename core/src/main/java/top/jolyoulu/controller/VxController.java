@@ -5,7 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import top.jolyoulu.config.VxParameterConfig;
+import top.jolyoulu.pipline.AbstractRequestHandlerContext;
+import top.jolyoulu.pipline.DefaultRequestPipeline;
+import top.jolyoulu.pipline.RequestContext;
 import top.jolyoulu.utils.CheckUtil;
+import top.jolyoulu.utils.MessageUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * @Author: LZJ
@@ -20,8 +28,10 @@ public class VxController {
     @Autowired
     private VxParameterConfig vxParameterConfig;
 
+    @Autowired
+    private DefaultRequestPipeline defaultRequestPipeline;
 
-    @GetMapping("/master1")
+    @GetMapping("/master")
     @ResponseBody
     public String init(@RequestParam("signature") String signature,
                        @RequestParam("timestamp") String timestamp,
@@ -31,5 +41,22 @@ public class VxController {
             return echostr;
         }
         return null;
+    }
+
+    @PostMapping(value = "/master")
+    public void receiver(@RequestBody String xml, HttpServletResponse resp, HttpServletRequest request){
+        try {
+            Map<String, String> msgMap = MessageUtil.string2Map(xml);
+            RequestContext requestContext = new RequestContext(msgMap, resp, request);
+            AbstractRequestHandlerContext ctx = defaultRequestPipeline.getCtx();
+            ctx.requestHandle(requestContext);
+//            String handlerMsg = weXinService.handlerMsg(msgMap);
+//            log.info("返回消息:{}",handlerMsg);
+//            resp.setContentType("text/xml;charset=UTF-8");
+//            resp.setCharacterEncoding("UTF-8");
+//            resp.getWriter().write(handlerMsg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
