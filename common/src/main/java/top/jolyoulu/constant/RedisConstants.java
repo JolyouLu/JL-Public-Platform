@@ -13,4 +13,9 @@ public class RedisConstants {
      */
     public static final String ACCESS_TOKEN = "access_token";
 
+    /**
+     * 用户消息
+     */
+    public static final String USER_MSG = "user_msg:";
+
 }

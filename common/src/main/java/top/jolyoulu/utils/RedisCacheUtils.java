@@ -5,6 +5,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @Author: JolyouLu
  * @Date: 2021/4/30 14:35
@@ -44,5 +46,29 @@ public class RedisCacheUtils {
     public boolean existsCacheObj(final String key){
         return redisTemplate.hasKey(key);
     }
+
+    /**
+     * 缓存一个基本对象并且设置过期时间
+     * @param key 缓存的键
+     * @param value 缓存的值
+     * @param timeout 超时时间（默认秒）
+     * @return true/false
+     */
+    public <T> boolean setExCacheObj(final String key,final T value,final long timeout){
+        return redisTemplate.opsForValue().setIfAbsent(key,value,timeout,TimeUnit.SECONDS);
+    }
+
+    /**
+     * 缓存一个基本对象并且设置过期时间
+     * @param key 缓存的键
+     * @param value 缓存的值
+     * @param timeout 超时时间
+     * @param unit 时间类型(时分秒)
+     * @return true/false
+     */
+    public <T> boolean setExCacheObj(final String key,final T value,final long timeout,final TimeUnit unit){
+        return redisTemplate.opsForValue().setIfAbsent(key,value,timeout,unit);
+    }
+
 
 }
