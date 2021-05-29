@@ -1,12 +1,1 @@
-# 微信接入框架
-## 框架结构
-> 本项目是基于SpringBoot 2.X构建，按子模块拆分
-> 项目结构主要分为4大基础模块(觉得不够的可以自己后面有说如何扩展)
-> 
-> common模块：
-> 
-> core模块：
-> 
-> framework模块：
-> 
-> web模块：
+[微信开发专栏说明](https://blog.csdn.net/weixin_44642403/article/details/117339205)
