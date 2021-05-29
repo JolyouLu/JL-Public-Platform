@@ -26,6 +26,16 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class VxMsgAspect {
 
+    @Autowired
+    VxMsgAspect vxMsgAspect;
+
+    //环绕通知
+    @Around("pointCutVXReceiver()")
+    public Object around(ProceedingJoinPoint pjp) throws Throwable {
+        //消息重排解决方案默认使用（SpringAop+HashMap）
+        return vxMsgAspect.mapSolution(pjp);
+    }
+
     //定义切入点
     @Pointcut("execution(* top.jolyoulu.controller.VxController.receiver(..))")
     public void pointCutVXReceiver(){};
@@ -33,13 +43,10 @@ public class VxMsgAspect {
     /**
      * 消息重排解决方案一(默认使用)：SpringAop+HashMap，适合普通单机应用
      */
-
     //线程安全的HashMap
     private static final ConcurrentHashMap<String,String> map = new ConcurrentHashMap<>();
 
-    //环绕通知
-    @Around("pointCutVXReceiver()")
-    public Object around1(ProceedingJoinPoint pjp) throws Throwable {
+    public Object mapSolution(ProceedingJoinPoint pjp) throws Throwable {
         Object retVal = null;
         //从连接点中获取参数
         Object[] args = pjp.getArgs();
@@ -66,15 +73,11 @@ public class VxMsgAspect {
 
     /**
      * 消息重排解决方案二(默认不使用)：SpringAop+Redis，适合分布式情况下
-     * 如需开启请把方案二注释去掉，并且将来方案一加上注释
      */
-
     @Autowired
     private RedisCacheUtils redisCacheUtils;
 
-    //环绕通知
-//    @Around("pointCutVXReceiver()")
-    public Object around2(ProceedingJoinPoint pjp) throws Throwable {
+    public Object redisSolution(ProceedingJoinPoint pjp) throws Throwable {
         Object retVal = null;
         //从连接点中获取参数
         Object[] args = pjp.getArgs();
