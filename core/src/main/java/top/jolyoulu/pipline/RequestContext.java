@@ -17,6 +17,10 @@ public class RequestContext {
     private HttpServletResponse response;
     private HttpServletRequest request;
 
+    /**
+     * 回复客户端消息
+     * @param msg 消息内容
+     */
     public void resultMsg(String msg){
         try {
             this.response.setContentType("text/xml;charset=UTF-8");
