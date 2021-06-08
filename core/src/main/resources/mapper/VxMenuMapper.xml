@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.jolyoulu.mapper.VxMenuMapper">
+
+    <resultMap id="selectMenuTreeResultMap" type="top.jolyoulu.domain.request.InitMenuFormBody">
+        <result property="name" column="menu_name"/>
+        <result property="type" column="menu_type"/>
+        <result property="url" column="menu_url"/>
+        <result property="key" column="menu_key"/>
+        <collection property="sub_button" ofType="top.jolyoulu.domain.request.InitMenuFormBody">
+            <result property="name" column="sm1_menu_name"/>
+            <result property="type" column="sm1_menu_type"/>
+            <result property="url" column="sm1_menu_url"/>
+            <result property="key" column="sm1_menu_key"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectMenuTree" resultMap="selectMenuTreeResultMap">
+        SELECT
+            sm.menu_name as menu_name,
+            sm.menu_type as menu_type,
+            sm.menu_url as menu_url,
+            sm.menu_key as menu_key,
+            sm1.menu_name as sm1_menu_name,
+            sm1.menu_type as sm1_menu_type,
+            sm1.menu_url as sm1_menu_url,
+            sm1.menu_key as sm1_menu_key
+        FROM vx_menu sm
+             LEFT JOIN vx_menu sm1 ON sm.id = sm1.parent_id
+        WHERE sm.tree_level = 'FIRST_MENU'
+    </select>
+
+    <update id="initSysMenuTable">
+        CREATE TABLE vx_menu
+        (
+            id             bigint auto_increment comment '主键' PRIMARY KEY,
+            parent_id      bigint           NULL comment '父级id',
+            tree_level     VARCHAR(20) DEFAULT 0 NULL comment '菜单级别',
+            tree_sort      bigint           NULL comment '本级排序号（升序）',
+            menu_type      VARCHAR(12)      NULL comment '菜单类型',
+            menu_name      CHAR(16)         NOT NULL comment '菜单名称',
+            menu_key       CHAR(128)        NULL comment '菜单KEY值，用于消息接口推送，不超过128字节(click等点击类型必须)',
+            menu_url       VARCHAR(500)     NULL comment '用户点击菜单可打开链接(view、miniprogram类型必须)',
+            menu_media_id  VARCHAR(64)      NULL comment '调用新增永久素材接口返回的合法media_id(media_id类型和view_limited类型必须)',
+            menu_app_id    VARCHAR(64)      NULL comment '小程序的appid(miniprogram类型必须)',
+            menu_page_path VARCHAR(64)      NULL comment '小程序的页面路径(miniprogram类型必须)'
+        );
+    </update>
+</mapper>
