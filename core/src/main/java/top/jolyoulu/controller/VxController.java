@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import top.jolyoulu.config.VxParameterConfig;
+import top.jolyoulu.domain.request.PushTemplateFormBody;
 import top.jolyoulu.pipline.AbstractRequestHandlerContext;
 import top.jolyoulu.pipline.DefaultRequestPipeline;
 import top.jolyoulu.pipline.RequestContext;
@@ -50,11 +51,6 @@ public class VxController {
             RequestContext requestContext = new RequestContext(msgMap, resp, request);
             AbstractRequestHandlerContext ctx = defaultRequestPipeline.getCtx();
             ctx.requestHandle(requestContext);
-//            String handlerMsg = weXinService.handlerMsg(msgMap);
-//            log.info("返回消息:{}",handlerMsg);
-//            resp.setContentType("text/xml;charset=UTF-8");
-//            resp.setCharacterEncoding("UTF-8");
-//            resp.getWriter().write(handlerMsg);
         } catch (Exception e) {
             e.printStackTrace();
         }
