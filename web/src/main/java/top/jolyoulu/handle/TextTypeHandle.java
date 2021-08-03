@@ -2,10 +2,9 @@ package top.jolyoulu.handle;
 
 import lombok.extern.slf4j.Slf4j;
 import top.jolyoulu.enums.MsgType;
-import top.jolyoulu.enums.PassiveMsgType;
 import top.jolyoulu.passiveMsg.entity.text.TextMessage;
 import top.jolyoulu.passiveMsg.utils.PassiveMsgUtil;
-import top.jolyoulu.pipline.AbstractRequestHandlerContext;
+import top.jolyoulu.pipline.AbstractRequestHandlerContextAdapter;
 import top.jolyoulu.pipline.RequestContext;
 
 import java.util.Date;
@@ -18,7 +17,7 @@ import java.util.Map;
  * 文本处理Handle
  */
 @Slf4j
-public class TextTypeHandle extends AbstractRequestHandlerContext {
+public class TextTypeHandle extends AbstractRequestHandlerContextAdapter {
 
     public TextTypeHandle(String name) {
         super(name);

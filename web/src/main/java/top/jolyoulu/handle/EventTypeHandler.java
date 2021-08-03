@@ -2,7 +2,7 @@ package top.jolyoulu.handle;
 
 import lombok.extern.slf4j.Slf4j;
 import top.jolyoulu.enums.MsgType;
-import top.jolyoulu.pipline.AbstractRequestHandlerContext;
+import top.jolyoulu.pipline.AbstractRequestHandlerContextAdapter;
 import top.jolyoulu.pipline.RequestContext;
 
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @Version 1.0
  */
 @Slf4j
-public class EventTypeHandler extends AbstractRequestHandlerContext {
+public class EventTypeHandler extends AbstractRequestHandlerContextAdapter {
     public EventTypeHandler(String name) {
         super(name);
     }

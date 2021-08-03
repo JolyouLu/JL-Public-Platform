@@ -4,14 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import top.jolyoulu.enums.MsgType;
 import top.jolyoulu.passiveMsg.entity.image.ImageCtx;
 import top.jolyoulu.passiveMsg.entity.image.ImageMessage;
-import top.jolyoulu.passiveMsg.entity.text.TextMessage;
 import top.jolyoulu.passiveMsg.utils.PassiveMsgUtil;
-import top.jolyoulu.pipline.AbstractRequestHandlerContext;
+import top.jolyoulu.pipline.AbstractRequestHandlerContextAdapter;
 import top.jolyoulu.pipline.RequestContext;
-import top.jolyoulu.utils.MessageUtil;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,7 +18,7 @@ import java.util.Map;
  * 图片处理Handle
  */
 @Slf4j
-public class ImageTypeHandle extends AbstractRequestHandlerContext {
+public class ImageTypeHandle extends AbstractRequestHandlerContextAdapter {
 
     public ImageTypeHandle(String name) {
         super(name);

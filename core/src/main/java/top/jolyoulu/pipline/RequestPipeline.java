@@ -7,6 +7,6 @@ package top.jolyoulu.pipline;
  */
 public interface RequestPipeline {
 
-    void addHandler(AbstractRequestHandlerContext ctx);
+    void addHandler(AbstractRequestHandlerContextAdapter ctx);
 
 }

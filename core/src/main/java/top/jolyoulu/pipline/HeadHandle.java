@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  * 管道头
  */
 @Slf4j
-public class HeadHandle extends AbstractRequestHandlerContext {
+public class HeadHandle extends AbstractRequestHandlerContextAdapter {
 
     public HeadHandle(String name) {
         super(name);

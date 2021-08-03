@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  * 管道尾
  */
 @Slf4j
-public class TailHandle extends AbstractRequestHandlerContext {
+public class TailHandle extends AbstractRequestHandlerContextAdapter {
     public TailHandle(String name) {
         super(name);
     }

@@ -6,22 +6,22 @@ package top.jolyoulu.pipline;
  * @Version 1.0
  * 重新的RequestHandler处理父类
  */
-public abstract class AbstractRequestHandlerContext{
+public abstract class AbstractRequestHandlerContextAdapter {
 
     //当前处理对象的下一个处理者
-    protected AbstractRequestHandlerContext requestHandlerContext;
+    protected AbstractRequestHandlerContextAdapter requestHandlerContext;
     //Handler名字
     protected String name;
 
-    public AbstractRequestHandlerContext(String name){
+    public AbstractRequestHandlerContextAdapter(String name){
         this.name = name;
     }
 
-    public AbstractRequestHandlerContext getRequestHandlerContext() {
+    public AbstractRequestHandlerContextAdapter getRequestHandlerContext() {
         return requestHandlerContext;
     }
 
-    public void setRequestHandlerContext(AbstractRequestHandlerContext requestHandlerContext) {
+    public void setRequestHandlerContext(AbstractRequestHandlerContextAdapter requestHandlerContext) {
         this.requestHandlerContext = requestHandlerContext;
     }
 

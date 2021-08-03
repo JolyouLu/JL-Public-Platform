@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import top.jolyoulu.config.VxParameterConfig;
-import top.jolyoulu.domain.request.PushTemplateFormBody;
-import top.jolyoulu.pipline.AbstractRequestHandlerContext;
+import top.jolyoulu.pipline.AbstractRequestHandlerContextAdapter;
 import top.jolyoulu.pipline.DefaultRequestPipeline;
 import top.jolyoulu.pipline.RequestContext;
 import top.jolyoulu.utils.CheckUtil;
@@ -49,7 +48,7 @@ public class VxController {
         try {
             Map<String, String> msgMap = MessageUtil.string2Map(xml);
             RequestContext requestContext = new RequestContext(msgMap, resp, request);
-            AbstractRequestHandlerContext ctx = defaultRequestPipeline.getCtx();
+            AbstractRequestHandlerContextAdapter ctx = defaultRequestPipeline.getCtx();
             ctx.requestHandle(requestContext);
         } catch (Exception e) {
             e.printStackTrace();

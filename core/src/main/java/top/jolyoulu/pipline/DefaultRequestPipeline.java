@@ -8,9 +8,9 @@ package top.jolyoulu.pipline;
  */
 public class DefaultRequestPipeline implements RequestPipeline{
 
-    private AbstractRequestHandlerContext ctx;
+    private AbstractRequestHandlerContextAdapter ctx;
 
-    public DefaultRequestPipeline(AbstractRequestHandlerContext ctx) {
+    public DefaultRequestPipeline(AbstractRequestHandlerContextAdapter ctx) {
         this.ctx = ctx;
     }
 
@@ -19,9 +19,9 @@ public class DefaultRequestPipeline implements RequestPipeline{
      * @param next
      */
     @Override
-    public void addHandler(AbstractRequestHandlerContext next) {
-        AbstractRequestHandlerContext context = this.ctx;
-        AbstractRequestHandlerContext tail = null;
+    public void addHandler(AbstractRequestHandlerContextAdapter next) {
+        AbstractRequestHandlerContextAdapter context = this.ctx;
+        AbstractRequestHandlerContextAdapter tail = null;
 
         while (context.getRequestHandlerContext() != null){
             //如果下一个TailHandle那么就不获取了
@@ -36,7 +36,7 @@ public class DefaultRequestPipeline implements RequestPipeline{
         context.getRequestHandlerContext().setRequestHandlerContext(tail);
     }
 
-    public AbstractRequestHandlerContext getCtx() {
+    public AbstractRequestHandlerContextAdapter getCtx() {
         return ctx;
     }
 }
